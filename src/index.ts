@@ -4,6 +4,7 @@
  */
 
 const PROPERTY_KEY = 'lastExecutionTime';
+const ACCESS_TOKEN_KEY = 'accessToken';
 
 /**
  * メイン関数: 前回実行以降の未読メールを読み取る
@@ -128,5 +129,29 @@ interface EmailData {
   bodyExcerpt: string;
 }
 
+function doGet(e: GoogleAppsScript.Events.DoGet): GoogleAppsScript.Content.TextOutput {
+  const props = PropertiesService.getScriptProperties();
+  const validToken = props.getProperty(ACCESS_TOKEN_KEY);
+  const requestToken = e.parameter.token;
+
+  if (!validToken || requestToken !== validToken) {
+    return ContentService.createTextOutput(
+      JSON.stringify({ error: 'unauthorized' })
+    ).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  const lastExecutionTime = getLastExecutionTime();
+  const emails = searchNewEmails(lastExecutionTime);
+
+  if (emails.length > 0) {
+    updateLastExecutionTime(new Date());
+  }
+
+  return ContentService.createTextOutput(
+    JSON.stringify({ hasNewMail: emails.length > 0, count: emails.length, emails })
+  ).setMimeType(ContentService.MimeType.JSON);
+}
+
 // GAS用にグローバルスコープに関数をエクスポート
 (globalThis as any).readNewEmails = readNewEmails;
+(globalThis as any).doGet = doGet;

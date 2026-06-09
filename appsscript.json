@@ -1,0 +1,13 @@
+{
+  "timeZone": "Asia/Tokyo",
+  "dependencies": {},
+  "webapp": {
+    "access": "ANYONE_ANONYMOUS",
+    "executeAs": "ME"
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "oauthScopes": [
+    "https://www.googleapis.com/auth/gmail.readonly",
+    "https://www.googleapis.com/auth/script.scriptapp"
+  ]
+}
