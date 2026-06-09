@@ -1,0 +1,17 @@
+{
+  "name": "gmail-reader-gas",
+  "version": "1.0.0",
+  "description": "Gmail reader using Google Apps Script",
+  "type": "module",
+  "scripts": {
+    "build": "bun build src/index.ts --outfile=dist/main.js --target=browser",
+    "deploy": "bun run build && clasp push",
+    "login": "clasp login",
+    "create": "clasp create --type standalone --title gmail-reader-gas --rootDir ./dist"
+  },
+  "devDependencies": {
+    "@google/clasp": "^2.4.2",
+    "@types/google-apps-script": "^1.0.83",
+    "typescript": "^5.4.5"
+  }
+}
