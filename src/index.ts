@@ -134,7 +134,13 @@ function doGet(e: GoogleAppsScript.Events.DoGet): GoogleAppsScript.Content.TextO
   const validToken = props.getProperty(ACCESS_TOKEN_KEY);
   const requestToken = e.parameter.token;
 
-  if (!validToken || requestToken !== validToken) {
+  if (!validToken) {
+    return ContentService.createTextOutput(
+      JSON.stringify({ error: 'Access token not configured' })
+    ).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  if (requestToken !== validToken) {
     return ContentService.createTextOutput(
       JSON.stringify({ error: 'unauthorized' })
     ).setMimeType(ContentService.MimeType.JSON);
