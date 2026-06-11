@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "bun build src/index.ts --outfile=dist/main.js --target=browser",
-    "deploy": "bun run build && clasp push",
+    "deploy": "bun run build && cd dist && clasp push",
     "login": "clasp login",
     "create": "clasp create --type standalone --title gmail-reader-gas --rootDir ./dist"
   },
