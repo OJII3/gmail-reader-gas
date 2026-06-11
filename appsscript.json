@@ -3,8 +3,9 @@
   "dependencies": {},
   "webapp": {
     "access": "ANYONE_ANONYMOUS",
-    "executeAs": "ME"
+    "executeAs": "USER_DEPLOYING"
   },
+  "runtimeVersion": "V8",
   "exceptionLogging": "STACKDRIVER",
   "oauthScopes": [
     "https://www.googleapis.com/auth/gmail.readonly",

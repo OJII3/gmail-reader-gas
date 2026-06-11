@@ -4,10 +4,10 @@
   "description": "Gmail reader using Google Apps Script",
   "type": "module",
   "scripts": {
-    "build": "bun build src/index.ts --outfile=dist/main.js --target=browser",
-    "deploy": "bun run build && cd dist && clasp push",
+    "build": "bun build src/index.ts --outfile=dist/main.js --target=browser && cp appsscript.json dist/appsscript.json",
+    "deploy": "bun run build && clasp push",
     "login": "clasp login",
-    "create": "clasp create --type standalone --title gmail-reader-gas --rootDir ./dist"
+    "create": "clasp create --type standalone --title gmail-reader-gas --rootDir ./dist && cp dist/.clasp.json .clasp.json"
   },
   "devDependencies": {
     "@google/clasp": "^2.4.2",
